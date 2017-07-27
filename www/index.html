@@ -90,6 +90,17 @@
             border:none;
             }
         </style>
+        <script>
+            var userid=getCookie('userid');
+            var username=getCookie('username');    
+            console.log('Login Usr:'+userid+' Name:'+username);
+            if (userid!="" && username!=""){
+                console.log('keep logged')
+               $('#iduser').val(userid);
+               $('#username').val(username);
+                getUsrById(userid);
+            }
+        </script>
     </head>
 
     <body>
@@ -122,6 +133,7 @@
             <input type="hidden" id="iduser">
             <input type="hidden" id="username">
             <input type="hidden" id="idmanufacturer">
+            <input type="hidden" id="namemanufacturer">
 
             <div class="table-thing widget uib_w_1 d-margins input-color" data-uib="twitter%20bootstrap/input" data-ver="1">
                 <label class="narrow-control" for="repEmail"></label>
@@ -139,9 +151,14 @@
                 <br>
                 <br>
             </div>
-            <button class="btn widget uib_w_3 d-margins btsignup btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btSignin">SIGN IN</button>
+            <button class="btn widget uib_w_3 d-margins btsignup btn-default font-oswald-white" data-uib="twitter%20bootstrap/button" data-ver="1" id="btSignin">SIGN IN</button>
 
-            <button class="btn widget uib_w_102 d-margins font-white-1 text-line-input noborder btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="btemailsignup">Don't have account? Sign up</button>
+            <button class="btn widget uib_w_102 d-margins text-line-input noborder btn-info font-oswald-white" data-uib="twitter%20bootstrap/button" data-ver="1" id="btemailsignup">Don't have account? Sign up</button>
+
+            <label class="checkbox checkbox-padding-left widget uib_w_111 d-margins font-oswald-white" data-uib="twitter%20bootstrap/checkbox" data-ver="1">
+                <center>
+                    <input type="checkbox" id="keeplogged">Keep me Logged in</center>
+            </label>
         </div>
         <div class="upage hidden" id="product-detail">
             <div class="upage-outer">
@@ -165,17 +182,18 @@
                     <div class="widget-container content-area horiz-area wrapping-col right"></div>
                 </div>
                 <div class="upage-content ac0 content-area vertical-col" id="page_33_8">
-                   <div style="position:relative;width:100%;" class="upage-content ac0 content-area vertical-col">
-                    <figure class="margin-auto widget uib_w_80 d-margins" data-uib="media/video" data-ver="0">
-                        <video id="myvideo"  width="100%" height="auto" onclick="videostartstop();">
-                            <source src="my/video/src.mp4" type="video/mp4">
-                                <source src="my/video/src.ogg" type="video/ogg">
-                                    <source src="my/video/src.webm" type="video/webm">
-                        </video>
-                    </figure>
+                    <div style="position:relative;width:100%;" class="upage-content ac0 content-area vertical-col" id="page_73_41" >
+<!--                        <figure class="margin-auto widget uib_w_80 d-margins" data-uib="media/video" data-ver="0">
+                            <video id="myvideo" width="100%" height="auto" onclick="videostartstop();">
+                                <source src="my/video/src.mp4" type="video/mp4">
+                                    <source src="my/video/src.ogg" type="video/ogg">
+                                        <source src="my/video/src.webm" type="video/webm">
+                            </video>
+                        </figure>
+-->
                     <div style="position:absolute;bottom:-5px;left:0;z-index:1;" class="tarea widget uib_w_106 " data-uib="media/text" data-ver="0" name="uib_w_106" id="prodDetailNamePrice">
+                        </div>
                     </div>
-                    </div>       
                     <div class="card_grid widget uib_w_14 wrapping-col d-margins flex-basis-14 font-white" data-uib="layout/card_grid" data-ver="0">
                         <div class="widget widget-container content-area vertical-col uib-card uib_w_15 cpad-0" data-uib="layout/card" data-ver="0">
                             <div class="tarea widget uib_w_19" data-uib="media/text" data-ver="0" name="uib_w_19">
@@ -232,9 +250,9 @@
                                 <p>repPictName1</p>
                             </div>
                         </div>
-                        <button class="btn widget uib_w_45 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmanu3"><i class="fa fa-line-chart button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manufacturer List</button>
+                        <button class="btn widget uib_w_45 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmanu3"><i class="fa fa-home button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</button>
                         <button class="btn widget uib_w_46 d-margins bg-black font-white button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btemail3"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email DPG</button>
-                        <button class="btn widget uib_w_47 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmessage3"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message Manufacturer</button>
+                        <button class="btn widget uib_w_47 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmessage3"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message to Manufacturer</button>
                         <div class="tarea widget uib_w_49 font-white button-height padding-skype" data-uib="media/text" data-ver="0" name="uib_w_49" id="skype1">
                             <div class="widget-container left-receptacle"></div>
                             <div class="widget-container right-receptacle"></div>
@@ -245,6 +263,26 @@
                         </div>
                         <button class="btn widget uib_w_48 font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btexit1"><i class="glyphicon glyphicon-off button-icon-left" data-position="left"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit</button>
 
+                    </div>
+                </div>
+            </div>
+            <div class="modal outer-element uib_w_113" data-uib="twitter%20bootstrap/modal" data-ver="1" data-backdrop="true" id="selmanu-product-detail">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title">Manufacturer Selection</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="col uib_col_9 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col" id="manuflist-product-detail">
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer"></div>
                     </div>
                 </div>
             </div>
@@ -308,9 +346,9 @@
                                 <p>repPictName1</p>
                             </div>
                         </div>
-                        <button class="btn widget uib_w_45 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmanu4"><i class="fa fa-line-chart button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manufacturer List</button>
+                        <button class="btn widget uib_w_45 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmanu4"><i class="fa fa-home button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</button>
                         <button class="btn widget uib_w_46 d-margins bg-black font-white button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btemail4"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email DPG</button>
-                        <button class="btn widget uib_w_47 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmessage4"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message Manufacturer</button>
+                        <button class="btn widget uib_w_47 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmessage4"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message to Manufacturer</button>
                         <div class="tarea widget uib_w_49 font-white button-height padding-skype" data-uib="media/text" data-ver="0" name="uib_w_49" id="skype2">
                             <div class="widget-container left-receptacle"></div>
                             <div class="widget-container right-receptacle"></div>
@@ -324,70 +362,113 @@
                     </div>
                 </div>
             </div>
+            <div class="modal outer-element uib_w_114" data-uib="twitter%20bootstrap/modal" data-ver="1" data-backdrop="true" id="selmanu-product-list">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title">Manufacturer Selection</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="col uib_col_10 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col" id="manuflist-product-list">
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="upage hidden" id="rep-page">
             <div class="upage-outer">
-                <div class="uib-header container-group inner-element uib_w_63 size-header header-blue" data-uib="layout/header" data-ver="0">
-                    <h2></h2>
-                    <div class="widget-container wrapping-col single-centered">
-                        <div class="tarea widget uib_w_89 d-margins" data-uib="media/text" data-ver="0" name="uib_w_89" id="nameRep1">
-                            <div class="widget-container left-receptacle"></div>
-                            <div class="widget-container right-receptacle"></div>
-                            <div class="text-container">
-                                <p>nameRep</p>
+                <div class="upage-content ac0" id="page_93_74">
+                    <div class="upage-outer">
+                        <div class="uib-header container-group inner-element uib_w_63 size-header header-blue" data-uib="layout/header" data-ver="0">
+                            <h2></h2>
+                            <div class="widget-container wrapping-col single-centered">
+                                <div class="tarea widget uib_w_89 d-margins" data-uib="media/text" data-ver="0" name="uib_w_89" id="nameRep1">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>nameRep</p>
+                                    </div>
+                                </div>
+
                             </div>
+                            <div class="widget-container content-area horiz-area wrapping-col left">
+
+                                <p id="btMenuRep" class="">&nbsp;&nbsp; <i class="fa fa-bars fa-lg"></i>
+
+                                </p>
+                            </div>
+                            <div class="widget-container content-area horiz-area wrapping-col right"></div>
                         </div>
 
+                        <div class="inner-element uib_w_71 uib_sidebar leftbar bar-bg thumb-bg bar-gutter swipe" data-uib="layout/left_sidebar" data-ver="1" data-anim="{'style':'overlap', 'v':250, 'side':'left', 'dur':200}" id="sidebarreppage">
+                            <div class="sidebar-content content-area vertical-col">
+
+                                <div class="tarea widget uib_w_44 d-margins product-name-header" data-uib="media/text" data-ver="0" name="uib_w_44" id="repPictName3">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>repPictName1</p>
+                                    </div>
+                                </div>
+                                <button class="btn widget uib_w_45 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmanu1"><i class="fa fa-home button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</button>
+                                <button class="btn widget uib_w_46 d-margins bg-black font-white button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btemail1"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email DPG</p>
+                                </button>
+                                <button class="btn widget uib_w_47 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmessage1"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message to Manufacturer</button>
+                                <div class="tarea widget uib_w_49 font-white padding-skype" data-uib="media/text" data-ver="0" name="uib_w_49" id="skype3">
+                                    <div class="text-container">
+                                        <i class="fa fa-skype button-icon-left icone-margin" data-position="left"></i>
+                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skype</p>
+                                    </div>
+                                </div>
+                                <button class="btn widget uib_w_48 font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btexit1"><i class="glyphicon glyphicon-off button-icon-left" data-position="left"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit</button>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="widget-container content-area horiz-area wrapping-col left">
-
-                        <p id="btMenuRep" class="">&nbsp;&nbsp; <i class="fa fa-bars fa-lg"></i>
-
-                        </p>
+                    <div class="tarea widget uib_w_87 d-margins" data-uib="media/text" data-ver="0" name="uib_w_87" id="featuredProd">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>featuredProd</p>
+                        </div>
                     </div>
-                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
-                </div>
-
-                <div class="inner-element uib_w_71 uib_sidebar leftbar bar-bg thumb-bg bar-gutter swipe" data-uib="layout/left_sidebar" data-ver="1" data-anim="{'style':'overlap', 'v':250, 'side':'left', 'dur':200}" id="sidebarreppage">
-                    <div class="sidebar-content content-area vertical-col">
-
-                        <div class="tarea widget uib_w_44 d-margins product-name-header" data-uib="media/text" data-ver="0" name="uib_w_44" id="repPictName3">
-                            <div class="widget-container left-receptacle"></div>
-                            <div class="widget-container right-receptacle"></div>
-                            <div class="text-container">
-                                <p>repPictName1</p>
-                            </div>
+                    <div class="tarea widget uib_w_88 d-margins" data-uib="media/text" data-ver="0" name="uib_w_88" id="listManufac">
+                        <div class="widget-container left-receptacle"></div>
+                        <div class="widget-container right-receptacle"></div>
+                        <div class="text-container">
+                            <p>listManufac</p>
                         </div>
-                        <button class="btn widget uib_w_45 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmanu1"><i class="fa fa-line-chart button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manufacturer List</button>
-                        <button class="btn widget uib_w_46 d-margins bg-black font-white button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btemail1"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email DPG</p>
-                        </button>
-                        <button class="btn widget uib_w_47 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmessage1"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message Manufacturer</p>
-                        </button>
-                        <div class="tarea widget uib_w_49 font-white padding-skype" data-uib="media/text" data-ver="0" name="uib_w_49" id="skype3">
-                            <div class="text-container">
-                                <i class="fa fa-skype button-icon-left icone-margin" data-position="left"></i>
-                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skype</p>
-                            </div>
-                        </div>
-                        <button class="btn widget uib_w_48 font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btexit1"><i class="glyphicon glyphicon-off button-icon-left" data-position="left"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit</button>
-
                     </div>
                 </div>
             </div>
-            <div class="tarea widget uib_w_87 d-margins" data-uib="media/text" data-ver="0" name="uib_w_87" id="featuredProd">
-                <div class="widget-container left-receptacle"></div>
-                <div class="widget-container right-receptacle"></div>
-                <div class="text-container">
-                    <p>featuredProd</p>
-                </div>
-            </div>
-            <div class="tarea widget uib_w_88 d-margins" data-uib="media/text" data-ver="0" name="uib_w_88" id="listManufac">
-                <div class="widget-container left-receptacle"></div>
-                <div class="widget-container right-receptacle"></div>
-                <div class="text-container">
-                    <p>listManufac</p>
+
+            <div class="modal outer-element uib_w_112" data-uib="twitter%20bootstrap/modal" data-ver="1" data-backdrop="true" id="selmanu-rep-page">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title">Manufacturer Selection</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="col uib_col_8 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col" id="manuflist-rep-page">
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -451,9 +532,9 @@
                                 <p>repPictName4</p>
                             </div>
                         </div>
-                        <button class="btn widget uib_w_45 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmanu2"><i class="fa fa-line-chart button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manufacturer List</button>
+                        <button class="btn widget uib_w_45 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmanu2"><i class="fa fa-home button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home</button>
                         <button class="btn widget uib_w_46 d-margins bg-black font-white button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btemail2"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email DPG</button>
-                        <button class="btn widget uib_w_47 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmessage2"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message Manufacturer</button>
+                        <button class="btn widget uib_w_47 d-margins font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btmessage2"><i class="glyphicon glyphicon-envelope button-icon-left" data-position="left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message to Manufacturer</button>
                         <div class="tarea widget uib_w_49 font-white button-height padding-skype" data-uib="media/text" data-ver="0" name="uib_w_49" id="skype4">
                             <div class="widget-container left-receptacle"></div>
                             <div class="widget-container right-receptacle"></div>
@@ -464,6 +545,26 @@
                         </div>
                         <button class="btn widget uib_w_48 font-white bg-black button-height text-left btn-xs btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btexit2"><i class="glyphicon glyphicon-off button-icon-left" data-position="left"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit</button>
 
+                    </div>
+                </div>
+            </div>
+            <div class="modal outer-element uib_w_115" data-uib="twitter%20bootstrap/modal" data-ver="1" data-backdrop="true" id="selmanu-email-DPG">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title">Manufacturer Selection</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="col uib_col_11 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col" id='manuflist-email-DPG'>
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer"></div>
                     </div>
                 </div>
             </div>

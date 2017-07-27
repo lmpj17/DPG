@@ -310,7 +310,7 @@ body#afui .splt {
 }
 @media all and (min-width: 2px) {
   .row-height-1 > .col > .content-area {
-    min-height: 222px;
+    min-height: 270px;
   }
 }
 .align-widget {
@@ -4400,4 +4400,10 @@ label:empty {
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
+}
+.radio-padding-left {
+  padding-left: 20px;
+}
+.checkbox-padding-left {
+  padding-left: 20px;
 }

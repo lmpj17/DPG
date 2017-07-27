@@ -28,9 +28,18 @@ function loginUsr()
                        console.log(result);
                        if (userData.MESSAGE == "OK"){
 							$("#iduser").val(userData.ID);
+                            var keeplog = $("input[id='keeplogged']:checked").val();
+                            if (keeplog){    
+                                document.cookie = "userid="+userData.ID;
+                                document.cookie = "username="+userData.NAME;
+                            }
+                            else
+                            {
+                                document.cookie = 'userid=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                                document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                            }
 							$("#username").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
-                            $("#nameRep1").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
-                            $("#nameRep2").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
+                            $("#nameRep1").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
                             $("#nameRep3").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
                             var item = "<br><br><table align='center' border='0' width='95%'  style='background-color:black; color:#fff;'>";
                                 item = item + '<tr><td><img class="img-circle" src="'+userData.IMG+'" width="100" /></td>';
@@ -41,10 +50,18 @@ function loginUsr()
                             $("#repPictName3").html(item);
                            $("#repPictName2").html(item);
                            $("#repPictName1").html(item);
-                           $("#skype1").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Link to my profile</a>');
-                           $("#skype2").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Link to my profile</a>');
-                           $("#skype3").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Link to my profile</a>');
-                           $("#skype4").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Link to my profile</a>');
+
+                           $("#skype1").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
+                           $("#skype2").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
+                           $("#skype3").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
+                           $("#skype4").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
+
+/*
+                           $("#skype1").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Skype Manufacturer</a>');
+                           $("#skype2").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Skype Manufacturer</a>');
+                           $("#skype3").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Skype Manufacturer</a>');
+                           $("#skype4").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Skype Manufacturer</a>');
+*/
 							listManufacturer();                           
 							activate_page("#rep-page");
                             $("#message-login").html("");
@@ -65,6 +82,82 @@ function loginUsr()
                 });
          
     }
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function getUsrById(iduser)         
+            {
+                $("#message-login").html("<center>Finding email information....</center>");
+//                var $iduser = document.getElementById('iduser').value;
+                console.log(iduser);
+                $.ajax({
+                    type: "GET",
+                    url: getURL()+"get-usr-by-id.php",
+                    timeout: 5000,
+                    contentType: "application/json; charset=utf-8",
+                    data: {"id":iduser},
+                    success: function (result, jqXHR) {
+
+                       var userData = JSON.parse(result);
+                       console.log(result);
+                       $("#iduser").val(userData.ID);
+                       $("#username").val(userData.NAME);
+                       if (userData.MESSAGE == "OK"){
+                            $("#username").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
+                            $("#nameRep1").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
+                            $("#nameRep3").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
+                            var item = "<br><br><table align='center' border='0' width='95%'  style='background-color:black; color:#fff;'>";
+                                item = item + '<tr><td><img class="img-circle" src="'+userData.IMG+'" width="100" /></td>';
+                                item = item + "<td style='padding-left:10px;'><p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 1vh);'>"+userData.NAME+"";
+                                item = item + "</td></tr><tr><td colspan=2>&nbsp;</td></tr><tr><td colspan=2>&nbsp;</td></tr><tr><td colspan=2>&nbsp;</td></tr></table>";
+                                item = item + "<p>";
+                            $("#repPictName4").html(item);
+                            $("#repPictName3").html(item);
+                           $("#repPictName2").html(item);
+                           $("#repPictName1").html(item);
+                           $("#skype1").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Link to my profile');
+                           $("#skype2").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Link to my profile');
+                           $("#skype3").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Link to my profile');
+                           $("#skype4").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Link to my profile');
+                            listManufacturer();                           
+                            activate_page("#rep-page");
+                            $("#message-login").html("");
+                       }
+                       else
+                       {
+                           $("#message-login").html('<center><b>'+userData.MESSAGE+'</center>');
+
+                       }                   
+         
+                    },
+                    error: function (jqXHR, status) {
+                        $("#message-login").html("<center>Server busy try again later...  "+status+"</center>");
+                        console.log(jqXHR.responseText);
+                        console.log(jqXHR.status);
+ 
+                    },
+                });
+         
+    }
+
+
+
+
+
 function getUserDetails()         
 
             {
@@ -122,7 +215,7 @@ function getUserDetails()
          
                         $.each(manufs,function(i, manuf){
                             console.log(manuf.IMG);
-                            var item = "<table onclick='listProdManufacturer("+ manuf.ID + ");' align='center' border='0' width='95%'  style='background: url("+manuf.IMG+") no-repeat center center ; border-spacing:0; border-collapse:collapse; color:#fff;'>";
+                            var item = "<table onclick='listProdManufacturer("+ manuf.ID + ",0,\"" + manuf.NAME + "\");' align='center' border='0' width='95%'  style='background: url("+manuf.IMG+") no-repeat center center ; border-spacing:0; border-collapse:collapse; color:#fff;'>";
                                 item = item + "<tr  style='background: rgba(0,174,239,0.7);'><td style='padding-left:10px;padding-bottom:10px;'><p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 2vh);'>"+manuf.NAME+"";
                                 item = item + "<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(1.5vw + 1.5vh);'>"+manuf.WEBSITE+"</td></tr></table>";
                                 item = item + "<p>";
@@ -139,6 +232,136 @@ function getUserDetails()
                 });
          
     } 
+
+   function listManufacturerEmail()         
+
+            {
+                // clean list div...
+                $("#manuflist-rep-page").empty();
+                $("#manuflist-email-DPG").empty();
+                $("#manuflist-product-list").empty();
+                $("#manuflist-product-detail").empty();
+                var iduser = document.getElementById('iduser').value;
+
+                console.log ('listManufactureremail');
+ 
+               $.ajax({
+                    type: "GET",
+                    url: getURL()+"list-manufacturer.php",
+                    timeout: 5000,
+                    contentType: "application/json; charset=utf-8",
+                    data: {"uid":iduser},
+                    success: function (result, jqXHR) {
+         
+                        var manufs = JSON.parse(result);
+         
+                        $.each(manufs,function(i, manuf){
+
+                            var item = "<table onclick='openManufEmailPage("+ manuf.ID + ",\""+ manuf.NAME  +"\");' border='0' width='98%' style='background-color:white;'>";
+                                item = item + "<tr><td>&nbsp;</td></tr>";
+                                item = item + "<tr><td><p style='font-family: Oswald Light;font-size:24px;'>"+manuf.NAME+"<p><hr></td></tr>";
+
+
+
+                            $("#manuflist-rep-page").append(item); 
+                            $("#manuflist-email-DPG").append(item); 
+                            $("#manuflist-product-list").append(item); 
+                            $("#manuflist-product-detail").append(item); 
+                        });
+         
+         
+                    },
+                    error: function (jqXHR, status) {
+                        $("#manuflist-rep-page").html("<center>Server Busy try later...  "+status+"</center>");
+                    },
+                });
+         
+    } 
+
+
+   function listManufacturerSkype()         
+
+            {
+                // clean list div...
+                $("#manuflist-rep-page").empty();
+                $("#manuflist-email-DPG").empty();
+                $("#manuflist-product-list").empty();
+                $("#manuflist-product-detail").empty();
+                var iduser = document.getElementById('iduser').value;
+
+                console.log ('listManufacturerSkype');
+ 
+               $.ajax({
+                    type: "GET",
+                    url: getURL()+"list-manufacturer.php",
+                    timeout: 5000,
+                    contentType: "application/json; charset=utf-8",
+                    data: {"uid":iduser},
+                    success: function (result, jqXHR) {
+         
+                        var manufs = JSON.parse(result);
+         
+                        $.each(manufs,function(i, manuf){
+
+                            var item = "<table onclick='openManufSkypePage("+ manuf.ID + ",\""+ manuf.SKYPE  +"\");' border='0' width='98%' style='background-color:white;'>";
+                                item = item + "<tr><td>&nbsp;</td></tr>";
+                                item = item + "<tr><td><p style='font-family: Oswald Light;font-size:24px;'>"+manuf.NAME+"<p><hr></td></tr>";
+
+                             console.log(manuf.SKYPE);   
+
+                            $("#manuflist-rep-page").append(item); 
+                            $("#manuflist-email-DPG").append(item); 
+                            $("#manuflist-product-list").append(item); 
+                            $("#manuflist-product-detail").append(item); 
+                        });
+         
+         
+                    },
+                    error: function (jqXHR, status) {
+                        $("#manuflist-rep-page").html("<center>Server Busy try later...  "+status+"</center>");
+                    },
+                });
+         
+    } 
+
+
+
+
+
+    function openManufEmailPage(ID,NAME)
+    {
+
+        console.log('openManufEmailPage:'+ID+NAME);
+        $('#idmanufacturer').val(ID);
+        $('#namemanufacturer').val(NAME);
+        $('#selmanu-rep-page').modal('hide');
+        $('#selmanu-email-DPG').modal('hide');
+        $('#selmanu-product-detail').modal('hide');
+        $('#selmanu-product-list').modal('hide');
+        showEmailPage('MANUF');
+        
+
+    }
+
+    function openManufSkypePage(ID,SKYPE)
+    {
+
+        console.log('openManufSkypePage:'+ID+SKYPE);
+//        $('#idmanufacturer').val(ID);
+//        $('#namemanufacturer').val(NAME);
+        $('#selmanu-rep-page').modal('hide');
+        $('#selmanu-email-DPG').modal('hide');
+        $('#selmanu-product-detail').modal('hide');
+        $('#selmanu-product-list').modal('hide');
+        
+        window.location = 'skype:' + SKYPE + '?chat';
+
+        
+    }
+
+
+
+
 
    function listCategories()         
 
@@ -197,7 +420,7 @@ function getUserDetails()
          
                         var products = JSON.parse(result);
          
-                     console.log(result);   
+                        
                     $.each(products,function(i, product){    
                                 console.log(product.IMG);
                             var item = "<table  class='bgimgprod' border='0' width='100%'  style='min-height:200px;background-size:auto; background:url("+product.IMG+") no-repeat center center;-webkit-background-size: 100% 100%;-moz-background-size: 100% 100%;-o-background-size: 100% 100%; background-size: 100% 100%;'  onclick='showProductDetail("+product.ID+")'>";
@@ -206,9 +429,10 @@ function getUserDetails()
                                 item = item + "<td style='max-height:30px;vertical-align:center; padding-left:10px;'>";
                                 item = item + "<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 2vh);'>"+product.FEATURED;
                                 item = item + "<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size: calc(2vw + 1vh);'>"+product.BRIEF+"</td>";
-                                item = item + "<td align='center' style='max-height:30px; padding: 15px 15px 0 0;'><table border='0'  width='20%' style='background-color:black; color:#fff;font-family:arial narrow;'>";
+                                item = item + "<td align='center' style='max-height:30px; padding: 15px 15px 0 0;'>";
+                                item = item + "<table border='0'  width='20%' style='background:rgba(0,0,0,0.3);color:#fff;font-family:arial narrow;'>";
                                 item = item + "<tr style='font-family: Oswald Light;font-size:12px;'><td  align='center' >MAP -&nbsp;</td><td  align='center'> MSRP</td ></tr>";
-                                item = item + "<tr><td bgcolor='#FFFFFF' align='center' colspan=2><font color='black' style='font-family: Oswald Light;font-size:13px;'><b>$"+product.MAP+" - $"+product.MSRP+"</td></tr>";
+                                item = item + "<tr><td bgcolor='#FFFFFF' align='center' colspan=2><font style='font-family: Oswald Light;font-size:13px;'><b>$"+product.MAP+" - $"+product.MSRP+"</td></tr>";
                                 
                                 item = item + "<tr><td  align='right' style='font-family: Oswald Light;font-size:10px;'>Wholesale:</td><td align='right'><font color='yellow'>$"+product.WHOLESALE+"</font></td></tr></table>";
                                 item = item + "</td></table>";
@@ -305,12 +529,15 @@ function getUserDetails()
                             $("#productDescription").html('<div align="left" width="70%"><p align="left"><font color="black" style="font-family:Oswald Light;font-size:22px;">'+product.DETAILS+'</font></div>');  
                             showVideoProduct(product.VIDEO,product.VIDEOOGG,product.VIDEOWEBM);                  
  //                           var item = "<div class='col-md-12 col-xs-12' style='width:100%;background-color:white;' onclick='showProductDetail("+product.ID+")'></div>";
-                            var img1 = "<img src='"+product.IMG1+"' style='width:100%; heigth:auto;' />";
+                            var img1 = '<a href="#" id="limg1" ><img id="simg1" src="'+product.IMG1+'" style="width:100%; heigth:auto;" /></a>';
+                            var img2 = '<a href="#" id="limg2" ><img id="simg2" src="'+product.IMG2+'" style="width:100%; heigth:auto;" /></a>';
+                            var img3 = '<a href="#" id="limg3" ><img id="simg3" src="'+product.IMG3+'" style="width:100%; heigth:auto;" /></a>';
+                            var img4 = '<a href="#" id="limg4" ><img id="simg4" src="'+product.IMG4+'" style="width:100%; heigth:auto;" /></a>';
   //                              item = item + "</div>";
                             $("#img1Detail").html(img1);                                 
-                            $("#img2Detail").html(img1);                                 
-                            $("#img3Detail").html(img1);                                 
-                            $("#img4Detail").html(img1);                                 
+                            $("#img2Detail").html(img2);                                 
+                            $("#img3Detail").html(img3);                                 
+                            $("#img4Detail").html(img4);                                 
 
 
 
@@ -320,7 +547,7 @@ function getUserDetails()
                                 item = item + "<tr ><td style='vertical-align:center; padding-left:10px; width:80%'>";
                                 item = item + "<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 2vh); color:white;'>"+product.NAME;
                                 item = item + "<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size: calc(2vw + 1vh);color:white;'>"+product.BRIEF+"</td>";
-                                item = item + "<td align='center' style='padding: 15px 15px 0 0;'><table border='0'  width='20%' style='background-color:black; color:#fff;font-family:arial narrow;'>";
+                                item = item + "<td align='center' style='padding: 15px 15px 0 0;'><table border='0'  width='20%' style=' color:#fff;font-family:arial narrow;'>";
                                 item = item + "<tr style='font-family: Oswald Light;font-size:12px;'><td  align='center' >MAP -&nbsp;</td><td  align='center'> MSRP</td ></tr>";
                                 item = item + "<tr><td bgcolor='#FFFFFF' align='center' colspan=2><font color='black' style='font-family: Oswald Light;font-size:13px;'><b>$"+product.MAP+" - $"+product.MSRP+"</td></tr>";
                                 
@@ -346,7 +573,7 @@ function getUserDetails()
                             $("#productPrice").html(item2);                                 
 // end here                                
                             var item2 = "<table border='0' width='100%'";
-                            item2 = item2 + "<tr><td width='70%' style='vertical-align:top;'><p style='font-family: Oswald Light;font-size:24px;'>PRODUCT DESCRIPTION:</td>";
+                            item2 = item2 + "<tr><td width='70%' style='vertical-align:top;'><p style='font-family: Oswald Light;font-size:20px;'>PRODUCT DESCRIPTION:</td>";
                             item2 = item2 + "<td width='20%'><p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a></td>";
                             item2 = item2 + "</tr></table>";
                             $("#brochureLink").append(item2);                                 
@@ -367,14 +594,38 @@ function getUserDetails()
          
     } 
 
+
+
+
+ function showImageOnTop(img){
+    console.log('image:'+img);    
+    var item = "<img src='"+img+"' style='width:100%; heigth:auto;' />";
+
+     $("#page_73_41").html(item);   
+
+
+ }
+
+
  function showVideoProduct(videoProd,videoogg,videowebm)  {       
 
+
+
+    var item = '<figure class="margin-auto widget uib_w_80 d-margins" data-uib="media/video" data-ver="0">';
+        item = item + '<video id="myvideo" width="100%" height="auto" onclick="videostartstop();">';
+        item = item + '<source src="'+ videoProd +'" type="video/mp4">';
+        item = item + '<source src="' + videoogg+ '" type="video/ogg">';
+        item = item + '<source src="'+ videowebm+'" type="video/webm">';
+        item = item + '</video>';
+        item = item + '</figure>';
+     $("#page_73_41").html(item);   
+
     var video = document.getElementById('myvideo');
-    var sources = video.getElementsByTagName('source');
+//    var sources = video.getElementsByTagName('source');
     console.log(videoProd);
-    sources[0].src = videoProd;
-    sources[1].src = videoogg;
-    sources[2].src = videowebm;
+//    sources[0].src = videoProd;
+//    sources[1].src = videoogg;
+//    sources[2].src = videowebm;
     video.load();
 
 }
@@ -414,14 +665,15 @@ function getUserDetails()
  
 
             console.log('changeTab category:'+category);
-
-            listProdManufacturer(manuf,category);
+            var manufname = document.getElementById('namemanufacturer').value;
+            
+            listProdManufacturer(manuf,category,manufname);
   //          $('#second-tab').hide();
             $('#tab-prod').click();
  
 }
 
- function listProdManufacturer(manuf,category)         
+ function listProdManufacturer(manuf,category,name)         
 
             {
 
@@ -430,9 +682,9 @@ function getUserDetails()
                 var iduser = document.getElementById('iduser').value;
                 $("#idmanufacturer").val(manuf);
                 listCategories();
-                console.log('listProdManufacturer:' + manuf + 'category:'+category);
-
- 
+                console.log('listProdManufacturer:' + manuf + 'category:'+category + 'name:'+name);
+                $("#namemanufacturer").val(name);
+                
                $.ajax({
                     type: "GET",
                     url: getURL()+"list-prod-manufacturer.php",
@@ -453,7 +705,7 @@ function getUserDetails()
                                 item = item + "<td style='vertical-align:center; padding-left:10px; width:80%;'>";
                                 item = item + "<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 2vh);'>"+product.NAME;
                                 item = item + "<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size: calc(2vw + 1vh);'>"+product.BRIEF+"</td>";
-                                item = item + "<td align='center' style='padding: 15px 15px 0 0;'><table border='0'  width='20%' style='background-color:black; color:#fff;font-family:arial narrow;'>";
+                                item = item + "<td align='center' style='padding: 15px 15px 0 0;'><table border='0'  width='20%' style='color:#fff;font-family:arial narrow;'>";
                                 item = item + "<tr style='font-family: Oswald Light;font-size:12px;'><td  align='center' >MAP -&nbsp;</td><td  align='center'> MSRP</td ></tr>";
                                 item = item + "<tr><td bgcolor='#FFFFFF' align='center' colspan=2><font color='black' style='font-family: Oswald Light;font-size:13px;'><b>$"+product.MAP+" - $"+product.MSRP+"</td></tr>";
                                 
@@ -788,6 +1040,9 @@ function showEmailPage(typeEmail)
         if (typeEmail == 'MANUF'){  
             $("#typeEmail").val(typeEmail);     
             var manuf = document.getElementById('idmanufacturer').value;
+            var namemanuf = document.getElementById('namemanufacturer').value;
+             $("#nameRep2").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:10pt;color:white;">Send to: '+namemanuf+'</center>');
+
             if (manuf != ''){  
             activate_page("#email-DPG");
             }
