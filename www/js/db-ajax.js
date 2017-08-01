@@ -432,7 +432,7 @@ function getUserDetails()
                                 item = item + "<td align='center' style='max-height:30px; padding: 15px 15px 0 0;'>";
                                 item = item + "<table border='0'  width='20%' style='background:rgba(0,0,0,0.3);color:#fff;font-family:arial narrow;'>";
                                 item = item + "<tr style='font-family: Oswald Light;font-size:12px;'><td  align='center' >MAP -&nbsp;</td><td  align='center'> MSRP</td ></tr>";
-                                item = item + "<tr><td bgcolor='#FFFFFF' align='center' colspan=2><font style='font-family: Oswald Light;font-size:13px;color:black;'><b>$"+product.MAP+" - $"+product.MSRP+"</td></tr>";
+                                item = item + "<tr><td bgcolor='#FFFFFF' align='center' colspan=2><font style='font-family: Oswald Light;font-size:13px;'><font color='black'><b>$"+product.MAP+" - $"+product.MSRP+"</font></td></tr>";
                                 
                                 item = item + "<tr><td  align='right' style='font-family: Oswald Light;font-size:10px;'>Wholesale:</td><td align='right'><font color='yellow'>$"+product.WHOLESALE+"</font></td></tr></table>";
                                 item = item + "</td></table>";
