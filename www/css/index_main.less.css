@@ -310,7 +310,7 @@ body#afui .splt {
 }
 @media all and (min-width: 2px) {
   .row-height-1 > .col > .content-area {
-    min-height: 270px;
+    min-height: 191px;
   }
 }
 .align-widget {

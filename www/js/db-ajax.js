@@ -38,9 +38,9 @@ function loginUsr()
                                 document.cookie = 'userid=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                                 document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                             }
-							$("#username").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
+							$("#username").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
                             $("#nameRep1").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
-                            $("#nameRep3").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
+                            $("#nameRep3").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
                             var item = "<br><br><table align='center' border='0' width='95%'  style='background-color:black; color:#fff;'>";
                                 item = item + '<tr><td><img class="img-circle" src="'+userData.IMG+'" width="100" /></td>';
                                 item = item + "<td style='padding-left:10px;'><p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 1vh);'>"+userData.NAME+"";
@@ -117,9 +117,9 @@ function getUsrById(iduser)
                        $("#iduser").val(userData.ID);
                        $("#username").val(userData.NAME);
                        if (userData.MESSAGE == "OK"){
-                            $("#username").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
-                            $("#nameRep1").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
-                            $("#nameRep3").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:22pt;color:white;">'+userData.NAME+'</center>');
+                            $("#username").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
+                            $("#nameRep1").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
+                            $("#nameRep3").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
                             var item = "<br><br><table align='center' border='0' width='95%'  style='background-color:black; color:#fff;'>";
                                 item = item + '<tr><td><img class="img-circle" src="'+userData.IMG+'" width="100" /></td>';
                                 item = item + "<td style='padding-left:10px;'><p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 1vh);'>"+userData.NAME+"";
@@ -129,10 +129,10 @@ function getUsrById(iduser)
                             $("#repPictName3").html(item);
                            $("#repPictName2").html(item);
                            $("#repPictName1").html(item);
-                           $("#skype1").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Link to my profile');
-                           $("#skype2").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Link to my profile');
-                           $("#skype3").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Link to my profile');
-                           $("#skype4").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Link to my profile');
+                           $("#skype1").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
+                           $("#skype2").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
+                           $("#skype3").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
+                           $("#skype4").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
                             listManufacturer();                           
                             activate_page("#rep-page");
                             $("#message-login").html("");
@@ -432,7 +432,7 @@ function getUserDetails()
                                 item = item + "<td align='center' style='max-height:30px; padding: 15px 15px 0 0;'>";
                                 item = item + "<table border='0'  width='20%' style='background:rgba(0,0,0,0.3);color:#fff;font-family:arial narrow;'>";
                                 item = item + "<tr style='font-family: Oswald Light;font-size:12px;'><td  align='center' >MAP -&nbsp;</td><td  align='center'> MSRP</td ></tr>";
-                                item = item + "<tr><td bgcolor='#FFFFFF' align='center' colspan=2><font style='font-family: Oswald Light;font-size:13px;'><b>$"+product.MAP+" - $"+product.MSRP+"</td></tr>";
+                                item = item + "<tr><td bgcolor='#FFFFFF' align='center' colspan=2><font style='font-family: Oswald Light;font-size:13px;color:black;'><b>$"+product.MAP+" - $"+product.MSRP+"</td></tr>";
                                 
                                 item = item + "<tr><td  align='right' style='font-family: Oswald Light;font-size:10px;'>Wholesale:</td><td align='right'><font color='yellow'>$"+product.WHOLESALE+"</font></td></tr></table>";
                                 item = item + "</td></table>";
@@ -697,7 +697,7 @@ function getUserDetails()
          
                      console.log(result);   
                     $.each(products,function(i, product){    
-                                 $("#manufacturerName1").html("<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 2vh);'><b>"+product.MANUFNAME+"</p>");
+                                 $("#manufacturerName1").html("<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;'>"+product.MANUFNAME+"</p>");
     
                             var item = "<table border='0' width='100%' style='min-height:200px;background-size:auto; background:url("+product.IMG+") no-repeat center center;-webkit-background-size: 100% 100%;-moz-background-size: 100% 100%;-o-background-size: 100% 100%; background-size: 100% 100%;' onclick='showProductDetail("+product.ID+")'>";
                                 item = item + "<tr height='85%'><td colspan=2></td></tr>";
@@ -1041,7 +1041,7 @@ function showEmailPage(typeEmail)
             $("#typeEmail").val(typeEmail);     
             var manuf = document.getElementById('idmanufacturer').value;
             var namemanuf = document.getElementById('namemanufacturer').value;
-             $("#nameRep2").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:10pt;color:white;">Send to: '+namemanuf+'</center>');
+             $("#nameRep2").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">Send to: '+namemanuf+'</center>');
 
             if (manuf != ''){  
             activate_page("#email-DPG");
