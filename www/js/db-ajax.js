@@ -27,7 +27,7 @@ function loginUsr()
 					   var userData = JSON.parse(result);
                        console.log(result);
                        if (userData.MESSAGE == "OK"){
-							$("#iduser").val(userData.ID);
+							             $("#iduser").val(userData.ID);
                             var keeplog = $("input[id='keeplogged']:checked").val();
                             if (keeplog){    
                                 document.cookie = "userid="+userData.ID;
@@ -38,18 +38,28 @@ function loginUsr()
                                 document.cookie = 'userid=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                                 document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                             }
-							$("#username").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
+							               $("#username").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
                             $("#nameRep1").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
                             $("#nameRep3").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+userData.NAME+'</center>');
-                            var item = "<br><br><table align='center' border='0' width='95%'  style='background-color:black; color:#fff;'>";
+                            var item = "<br><table align='center' border='0' width='95%'  style='background-color:black; color:#fff;'>";
                                 item = item + '<tr><td><img class="img-circle" src="'+userData.IMG+'" width="100" /></td>';
                                 item = item + "<td style='padding-left:10px;'><p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 1vh);'>"+userData.NAME+"";
                                 item = item + "</td></tr><tr><td colspan=2>&nbsp;</td></tr><tr><td colspan=2>&nbsp;</td></tr><tr><td colspan=2>&nbsp;</td></tr></table>";
                                 item = item + "<p>";
-                            $("#repPictName4").html(item);
-                            $("#repPictName3").html(item);
-                           $("#repPictName2").html(item);
-                           $("#repPictName1").html(item);
+         
+                            var itemclose = '<p align="right"><a href="#" onclick="closeSideBar1();"> Close</a></p>';
+                           $("#repPictName1").html(itemclose);
+                            var itemclose = '<p align="right"><a href="#" onclick="closeSideBar2();"> Close</a></p>';
+                           $("#repPictName2").html(itemclose);
+                            var itemclose = '<p align="right"><a href="#" onclick="closeSideBar3();"> Close</a></p>';
+                           $("#repPictName3").html(itemclose);
+                            var itemclose = '<p align="right"><a href="#" onclick="closeSideBar4();"> Close</a></p>';
+                           $("#repPictName4").html(itemclose);
+
+                            $("#repPictName4").append(item);
+                            $("#repPictName3").append(item);
+                           $("#repPictName2").append(item);
+                           $("#repPictName1").append(item);
 
                            $("#skype1").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
                            $("#skype2").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<font color="#fff">Skype Manufacturer');
@@ -62,8 +72,8 @@ function loginUsr()
                            $("#skype3").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Skype Manufacturer</a>');
                            $("#skype4").html('<i class="fa fa-skype button-icon-left icone-margin" data-position="left" style="padding-top:4px"></i>&nbsp;&nbsp;&nbsp;<a href="skype:'+userData.SKYPE+'?userinfo" " ><font color="#fff">Skype Manufacturer</a>');
 */
-							listManufacturer();                           
-							activate_page("#rep-page");
+							         listManufacturer();                           
+							         activate_page("#rep-page");
                             $("#message-login").html("");
                        }
                        else
@@ -82,7 +92,18 @@ function loginUsr()
                 });
          
     }
-
+function closeSideBar1() {
+    uib_sb.toggle_sidebar($(".uib_w_72"));
+}
+function closeSideBar2() {
+    uib_sb.toggle_sidebar($(".uib_w_42"));  
+}
+function closeSideBar3() {
+    uib_sb.toggle_sidebar($(".uib_w_71"));
+}
+function closeSideBar4() {
+    uib_sb.toggle_sidebar($(".uib_w_97"));  
+}
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -197,9 +218,9 @@ function getUserDetails()
 
             {
                 // clean list div...
-                $("#listManufac").empty();
+        $("#listManufac").empty();
 				var iduser = document.getElementById('iduser').value;
-                $("#msgListManuf").html("");
+        $("#msgListManuf").html("");
 
 				console.log ('listManufacturer');
  
@@ -232,6 +253,49 @@ function getUserDetails()
                 });
          
     } 
+
+
+   function showStores(idProd)         
+
+            {
+                // clean list div...
+        $("#listStores").empty();
+        var iduser = document.getElementById('iduser').value;
+        
+        console.log ('showStores');
+        var first = 0;
+               $.ajax({
+                    type: "GET",
+                    url: getURL()+"list-stores.php",
+                    timeout: 5000,
+                    contentType: "application/json; charset=utf-8",
+                    data: {"pid":idProd},
+                    success: function (result, jqXHR) {
+         
+                        var stores = JSON.parse(result);
+         
+                        $.each(stores,function(i, store){
+                            console.log(store.IMG);
+                            if (first == 0)
+                              {$("#listStores").append('<p style="padding-top:10px;font-family: Oswald Light;font-size:20px;">SOLD IN:</p>'); 
+                                first = 1;}
+                            var item = "<table align='center' border='0' width='95%'  style='background: url("+ store.IMG+") no-repeat center center ; background-size: cover ;background-size: 100% auto; border-spacing:0; border-collapse:collapse; color:#fff;'>";
+                                item = item + "<tr  style='background: rgba(0,174,239,0.7);'><td style='padding-left:10px;padding-bottom:10px;'><p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 2vh);'>"+store.NAME+"";
+                                item = item + "<p style='margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(1.5vw + 1.5vh);'>"+store.WEBSITE+"</td></tr></table>";
+                                item = item + "<p>";
+                            $("#listStores").append(item); 
+                        });
+         
+         
+                    },
+                    error: function (jqXHR, status) {
+                        $("#listStores").html("<center>Server Busy try later...  "+status+"</center>");
+                    },
+                });
+         
+    } 
+
+
 
    function listManufacturerEmail()         
 
@@ -525,9 +589,32 @@ function getUserDetails()
                        
                     $.each(products,function(i, product){    
 
-                            $("#prodNameHeader").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:calc(2vw + 1vh);color:white;">'+product.NAME+'</p></center>');  
-                            $("#productDescription").html('<div align="left" width="70%"><p align="left"><font color="black" style="font-family:Oswald Light;font-size:22px;">'+product.DETAILS+'</font></div>');  
-                            showVideoProduct(product.VIDEO,product.VIDEOOGG,product.VIDEOWEBM);                  
+                            $("#prodNameHeader").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">'+product.NAME+'</p></center>');  
+                            var item = '<div class="col-md-12">';
+                            item += '<div class="col-xs-8 col-md-8" align="left" width="80%">';
+                            item += "<p style='font-family: Oswald Light;font-size:20px;padding-top:10px;'><strong>PRODUCT DESCRIPTION:</strong>";
+                            item += '<p align="left"><font color="black" style="font-family:Oswald Light;font-size:22px;">'+product.DETAILS+'</font>';
+                            item += '</div>';  
+                            item += '<div  class="col-xs-4 col-md-4" align="right" width="20%" style="padding-top:10px;">';
+                            item += "<p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a>";
+                            item += "<p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a>";
+                            item += "<p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a>";
+                            item += "<p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a>";
+
+                            item += '</div>';
+                            item += '</div>';  
+  
+
+                            $("#productDescription").html(item);  
+                            showVideoProduct(product.VIDEO,product.VIDEOOGG,product.VIDEOWEBM);   
+                            var item = '<div style="position:absolute;bottom:-5px;left:0;z-index:1;" class="tarea widget uib_w_106 " data-uib="media/text" data-ver="0" name="uib_w_106" id="prodDetailNamePrice"></div>';
+                            $("#page_73_41").append(item); 
+                            var item = '<div style="position:absolute;top:30%;left:45%;z-index:1;background-color: rgba(90, 90, 90, 0.0);" class="tarea widget  " data-uib="media/text" data-ver="0" id="playVideo" onclick="videostartstop();">';
+                                item +='<i class="fa fa-play-circle-o fa-5x"></i>';
+                                item +='</div>';
+                            $("#page_73_41").append(item); 
+
+                                        
  //                           var item = "<div class='col-md-12 col-xs-12' style='width:100%;background-color:white;' onclick='showProductDetail("+product.ID+")'></div>";
                             var img1 = '<a href="#" id="limg1" ><img id="simg1" src="'+product.IMG1+'" style="width:100%; heigth:auto;" /></a>';
                             var img2 = '<a href="#" id="limg2" ><img id="simg2" src="'+product.IMG2+'" style="width:100%; heigth:auto;" /></a>';
@@ -539,7 +626,9 @@ function getUserDetails()
                             $("#img3Detail").html(img3);                                 
                             $("#img4Detail").html(img4);                                 
 
-
+                            $("#idmanufacturer").val(product.MANUFACTURER);                                 
+                            $("#namemanufacturer").val(product.NAMEMANUFACTURER);                                 
+                            console.log(product.MANUFACTURER+"##"+product.NAMEMANUFACTURER)
 
                            
  
@@ -570,16 +659,20 @@ function getUserDetails()
                                 item2 = item2 + "<tr><td bgcolor='#FFFFFF'><font color='black'>$"+product.MAP+"</td><td  bgcolor='#FFFFFF'  align='right'><font color='black'>$"+product.MSRP+"</td></tr>";
                                 item2 = item2 + "<tr><td >Wholesale:</td><td><font color='yellow'>$"+product.WHOLESALE+"</font></td></tr></table>";
                                 item2 = item2 + "</div>";
-                            $("#productPrice").html(item2);                                 
+                            $("#productPrice").html(item2);   
+
+                            showStores(idProd);                              
 // end here                                
-                            var item2 = "<table border='0' width='100%'";
-                            item2 = item2 + "<tr><td width='70%' style='vertical-align:top;'><p style='font-family: Oswald Light;font-size:20px;'>PRODUCT DESCRIPTION:</td>";
-                            item2 = item2 + "<td width='20%'><p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a></td>";
-                            item2 = item2 + "</tr></table>";
-                            $("#brochureLink").append(item2);                                 
-                           var item2 = "<a href='"+product.VIDEO+"'>"+product.VIDEO+"'</a>";
-                            item2 = item2 + "</tr></table>";
-                             $("#videolink").html(item2); 
+//                            var item2 = "<table border='0' width='100%'";
+//                            item2 = item2 + "<tr><td width='70%' style='vertical-align:top;'>";
+//                            item2 = item2 + "<p style='font-family: Oswald Light;font-size:20px;padding-top:10px;'>PRODUCT DESCRIPTION:";
+//                            item2 = item2 + "</td><td width='20%'>";
+//                            item2 = item2 + "<p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a>";
+//                            item2 = item2 + "</td></tr></table>";
+//                           $("#brochureLink").append(item2);                                 
+//                           var item2 = "<a href='"+product.VIDEO+"'>"+product.VIDEO+"'</a>";
+//                            item2 = item2 + "</tr></table>";
+//                             $("#videolink").html(item2); 
                             activate_page("#product-detail");
                         
                          });
@@ -638,14 +731,20 @@ function getUserDetails()
     if (video.paused){
         console.log('play video paused');
         video.play();
+        $('#playVideo').hide();
     } 
     else
      if (video.ended){
         console.log('play video ended');
         video.play();
+        $('#playVideo').hide();
      }
      else
-       video.pause(); 
+     {
+       video.pause();
+       $('#playVideo').show();
+ 
+     }
     
 
 }
@@ -1038,6 +1137,19 @@ function showEmailPage(typeEmail)
         }
 
         if (typeEmail == 'MANUF'){  
+            $("#typeEmail").val(typeEmail);     
+            var manuf = document.getElementById('idmanufacturer').value;
+            var namemanuf = document.getElementById('namemanufacturer').value;
+             $("#nameRep2").html('<center><p style="margin-top: 0em; margin-bottom: 0em;font-family: Oswald Light;font-size:18pt;color:white;">Send to: '+namemanuf+'</center>');
+
+            if (manuf != ''){  
+            activate_page("#email-DPG");
+            }
+            else
+            {alert('Select Manufacturer First.')}
+        }
+
+       if (typeEmail == 'SAMPLE'){  
             $("#typeEmail").val(typeEmail);     
             var manuf = document.getElementById('idmanufacturer').value;
             var namemanuf = document.getElementById('namemanufacturer').value;

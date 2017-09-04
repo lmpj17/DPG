@@ -368,7 +368,7 @@ label:empty {
 */
 .text-line-input {
   background-color: transparent;
-  color: #eeeeee;
+  color: #fff;
   outline: none;
   outline-style: none;
   border-top: none;
@@ -4406,4 +4406,11 @@ label:empty {
 }
 .checkbox-padding-left {
   padding-left: 20px;
+}
+/*
+	.input-focus > .narrow-control - affects control label
+	.input-focus > .wide-control - affects input
+*/
+input:focus {
+  color: white;
 }

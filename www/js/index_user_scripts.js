@@ -348,6 +348,15 @@
          return false;
     });
     
+        /* button  #btsample */
+    $(document).on("click", "#btsample", function(evt)
+    {
+        console.log('btsample');
+        showEmailPage('SAMPLE');
+        /* your code goes here */ 
+         return false;
+    });
+    
     }
  document.addEventListener("app.Ready", register_event_handlers, false);
 })();
