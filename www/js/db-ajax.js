@@ -16,7 +16,7 @@ function loginUsr()
                 $("#message-login").html("<center>Finding email information....</center>");
                 var $email = document.getElementById('repEmail').value;
                 var $password = document.getElementById('repPwd').value;
-                console.log($email);
+                console.log("email:"+$email+$password);
                 $.ajax({
                     type: "GET",
                     url: getURL()+"login.php",
@@ -25,7 +25,7 @@ function loginUsr()
                     data: {"email":$email, "password":$password},
                     success: function (result, jqXHR) {
 					   var userData = JSON.parse(result);
-                       console.log(result);
+                       console.log(userData);
                        if (userData.MESSAGE == "OK"){
 							             $("#iduser").val(userData.ID);
                             var keeplog = $("input[id='keeplogged']:checked").val();
@@ -597,9 +597,9 @@ function getUserDetails()
                             item += '</div>';  
                             item += '<div  class="col-xs-4 col-md-4" align="right" width="20%" style="padding-top:10px;">';
                             item += "<p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a>";
-                            item += "<p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a>";
-                            item += "<p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a>";
-                            item += "<p align='right'><a href='"+product.BROCHURE+"'><img src='"+product.IMGBROCHURE+"' height='60px' /></a>";
+                            item += "<p align='right'><a href='"+product.BROCHUREWS+"'><img src='"+product.IMGBROCHUREW+"' height='60px' /></a>";
+                            item += "<p align='right'><a href='"+product.BROCHURERT+"'><img src='"+product.IMGBROCHURER+"' height='60px' /></a>";
+                            item += "<p align='right'><a href='"+product.BROCHURESD+"'><img src='"+product.IMGBROCHURES+"' height='60px' /></a>";
 
                             item += '</div>';
                             item += '</div>';  
