@@ -5,7 +5,7 @@ function getURL()
  
             {
 //             return 'http://www.be1worldservices.com/maxima/';
-             return 'http://dpg.lmsis.com.br/ws/';
+             return 'http://13.58.50.107/dpg/ws/';
          
     } 	
 

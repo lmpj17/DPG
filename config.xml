@@ -29,6 +29,7 @@
 </platform>
 <preference name="phonegap-version" value="cli-6.2.0" />
 <preference name="xwalkMultipleApk" value="false" />
+<plugin name="cordova-plugin-crosswalk-webview" spec="1.8.0"/>
 <plugin name="cordova-plugin-whitelist" spec="1.2.2"/>
 <platform  name="ios">
     <!-- below requires the splash screen plugin -->
